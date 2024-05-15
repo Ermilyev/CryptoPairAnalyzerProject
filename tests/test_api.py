@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock
-from api import BybitAPI
+from api.api import BybitAPI
 
 
 class TestBybitAPI(unittest.TestCase):

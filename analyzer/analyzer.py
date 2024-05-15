@@ -2,8 +2,8 @@ import itertools
 import numpy as np
 from statsmodels.tsa.stattools import adfuller
 from tabulate import tabulate
-from api import BybitAPI
-from data_processor import DataProcessor
+from api.api import BybitAPI
+from processor.data_processor import DataProcessor
 
 
 class CryptoPairAnalyzer:

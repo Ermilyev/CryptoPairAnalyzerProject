@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock
 import pandas as pd
-from analyzer import CryptoPairAnalyzer
+from analyzer.analyzer import CryptoPairAnalyzer
 
 
 class TestCryptoPairAnalyzer(unittest.TestCase):

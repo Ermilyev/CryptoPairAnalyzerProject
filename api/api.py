@@ -1,7 +1,7 @@
 import datetime as dt
 from pybit.unified_trading import HTTP
 import pandas as pd
-from data_processor import DataProcessor
+from processor.data_processor import DataProcessor
 
 
 class BybitAPI:

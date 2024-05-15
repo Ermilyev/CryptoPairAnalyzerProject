@@ -1,6 +1,6 @@
 import unittest
 import pandas as pd
-from data_processor import DataProcessor
+from processor.data_processor import DataProcessor
 
 
 class TestDataProcessor(unittest.TestCase):
