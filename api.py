@@ -1,6 +1,7 @@
 import datetime as dt
-import pandas as pd
 from pybit.unified_trading import HTTP
+import pandas as pd
+from data_processor import DataProcessor
 
 
 class BybitAPI:
@@ -35,4 +36,4 @@ class BybitAPI:
         if 'result' not in data or 'list' not in data['result']:
             self.logger.error(f"Failed to fetch data for {symbol}: {data.get('ret_msg', 'No error message provided')}")
             return pd.DataFrame()
-        return data['result']
+        return DataProcessor.process_data(data['result'])
