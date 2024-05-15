@@ -6,7 +6,7 @@ This project analyzes cryptocurrency pairs using statistical methods.
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/crypto_analyzer.git
+    git clone https://github.com/ermilyev/crypto_analyzer.git
     cd crypto_analyzer
     ```
 
