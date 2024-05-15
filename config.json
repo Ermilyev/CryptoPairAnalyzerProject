@@ -1,0 +1,10 @@
+{
+  "_comment_start_time": "Количество дней в периоде",
+  "start_time": 30,
+  "_comment_test_method": "0 - Обычный метод, 1 - Тестовый метод",
+  "test_method": 0,
+  "_comment_spread_type": "0 - Деление, 1 - Вычитание логорифмов",
+  "spread_type": 0,
+  "_comment_top_count": "Максимальное количество результатов для вывода",
+  "top_count": 50
+}
