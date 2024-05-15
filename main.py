@@ -1,6 +1,6 @@
-from config import read_configuration
-from logger import setup_logger
-from analyzer import CryptoPairAnalyzer
+from config.config import read_configuration
+from logger.logger import setup_logger
+from analyzer.analyzer import CryptoPairAnalyzer
 
 
 def main():
