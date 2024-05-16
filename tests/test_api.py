@@ -5,14 +5,14 @@ from api.api import BybitAPI
 
 class TestBybitAPI(unittest.TestCase):
     def setUp(self):
-        config = {
+        self.config = {
             'start_time': 30,
             'test_method': 0,
             'spread_type': 0,
             'top_count': 10
         }
         self.logger = MagicMock()
-        self.api = BybitAPI(config, self.logger, testnet=True)
+        self.api = BybitAPI(self.config, self.logger, testnet=True)
 
     def test_get_usdt_pairs(self):
         self.api.session.get_tickers = MagicMock(return_value={
@@ -36,6 +36,11 @@ class TestBybitAPI(unittest.TestCase):
         self.api.session.get_tickers = MagicMock(return_value={})
         pairs = self.api.get_usdt_pairs()
         self.assertEqual(pairs, [])
+
+    def test_get_usdt_pairs_test_method(self):
+        self.api.config['test_method'] = 1
+        pairs = self.api.get_usdt_pairs()
+        self.assertEqual(pairs, ['BTCUSDT', 'ETHUSDT', 'MATICUSDT'])
 
     def test_fetch_data(self):
         self.api.session.get_kline = MagicMock(return_value={
