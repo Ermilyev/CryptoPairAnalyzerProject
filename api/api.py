@@ -31,6 +31,10 @@ class BybitAPI:
         return ['BTCUSDT', 'ETHUSDT', 'MATICUSDT']
 
     def fetch_data(self, symbol, interval):
+        valid_intervals = ['1', '3', '5', '15', '30', '60', '120', '240', '360', '720', 'D', 'W', 'M']
+        if interval not in valid_intervals:
+            raise ValueError(f"Invalid interval: {interval}")
+
         self.logger.info(f"Fetching data for symbol: {symbol} with interval: {interval}")
         data = self.session.get_kline(symbol=symbol, interval=interval, start=self.start_time, end=self.end_time)
         if 'result' not in data or 'list' not in data['result']:
