@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import MagicMock
 import pandas as pd
 import numpy as np
+from statsmodels.tsa.stattools import adfuller
 from analyzer.analyzer import CryptoPairAnalyzer
 
 
@@ -61,6 +62,19 @@ class TestCryptoPairAnalyzer(unittest.TestCase):
         result = self.analyzer.apply_adf_test(data, '1d')
         self.assertEqual(result, [])
 
+    def test_apply_adf_test_log_spread(self):
+        self.analyzer.config['spread_type'] = 1
+        data = {
+            'BTCUSDT': pd.DataFrame({
+                'closePrice': [1, 2, 3, 4, 5]
+            }, index=pd.date_range('2023-01-01', periods=5, freq='D')),
+            'ETHUSDT': pd.DataFrame({
+                'closePrice': [2, 3, 4, 5, 6]
+            }, index=pd.date_range('2023-01-01', periods=5, freq='D'))
+        }
+        result = self.analyzer.apply_adf_test(data, '1d')
+        self.assertIsInstance(result, list)
+
     def test_analyze_pairs(self):
         self.analyzer.api.get_usdt_pairs = MagicMock(return_value=['BTCUSDT', 'ETHUSDT'])
         self.analyzer.api.fetch_data = MagicMock(return_value=pd.DataFrame({
@@ -95,6 +109,19 @@ class TestCryptoPairAnalyzer(unittest.TestCase):
         }).set_index(pd.to_datetime([])))
         self.analyzer.analyze_pairs()
         self.logger.info.assert_called()
+
+    def test_apply_adf_test_adfuller_error(self):
+        data = {
+            'BTCUSDT': pd.DataFrame({
+                'closePrice': [1, 2, 3, 4, 5]
+            }, index=pd.date_range('2023-01-01', periods=5, freq='D')),
+            'ETHUSDT': pd.DataFrame({
+                'closePrice': [2, 3, 4, 5, 6]
+            }, index=pd.date_range('2023-01-01', periods=5, freq='D'))
+        }
+        with unittest.mock.patch('statsmodels.tsa.stattools.adfuller', side_effect=ValueError("ADF Test Error")):
+            result = self.analyzer.apply_adf_test(data, '1d')
+            self.assertEqual(result, [])
 
 
 if __name__ == '__main__':
