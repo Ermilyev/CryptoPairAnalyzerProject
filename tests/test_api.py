@@ -27,6 +27,16 @@ class TestBybitAPI(unittest.TestCase):
         pairs = self.api.get_usdt_pairs()
         self.assertEqual(pairs, ['BTCUSDT', 'ETHUSDT', 'MATICUSDT'])
 
+    def test_get_usdt_pairs_no_result(self):
+        self.api.session.get_tickers = MagicMock(return_value={'result': {}})
+        pairs = self.api.get_usdt_pairs()
+        self.assertEqual(pairs, [])
+
+    def test_get_usdt_pairs_error(self):
+        self.api.session.get_tickers = MagicMock(return_value={})
+        pairs = self.api.get_usdt_pairs()
+        self.assertEqual(pairs, [])
+
     def test_fetch_data(self):
         self.api.session.get_kline = MagicMock(return_value={
             'result': {
@@ -39,6 +49,20 @@ class TestBybitAPI(unittest.TestCase):
         })
         data = self.api.fetch_data('BTCUSDT', '240')
         self.assertFalse(data.empty)
+
+    def test_fetch_data_no_result(self):
+        self.api.session.get_kline = MagicMock(return_value={'result': {}})
+        data = self.api.fetch_data('BTCUSDT', '240')
+        self.assertTrue(data.empty)
+
+    def test_fetch_data_error(self):
+        self.api.session.get_kline = MagicMock(return_value={})
+        data = self.api.fetch_data('BTCUSDT', '240')
+        self.assertTrue(data.empty)
+
+    def test_fetch_data_invalid_interval(self):
+        with self.assertRaises(ValueError):
+            self.api.fetch_data('BTCUSDT', 'invalid_interval')
 
 
 if __name__ == '__main__':
