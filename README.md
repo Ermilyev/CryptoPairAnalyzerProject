@@ -3,7 +3,7 @@
 Crypto Analyzer is a Python-based project designed to analyze cryptocurrency pairs using advanced statistical methods. This tool fetches market data from cryptocurrency exchanges and applies statistical tests to identify promising trading pairs. The project is designed to help traders and analysts make informed decisions based on historical data analysis.
 
 ![Build Status](https://github.com/Ermilyev/cryptopairanalyzer/actions/workflows/ci.yml/badge.svg)
-![Coverage](https://coveralls.io/repos/github/Ermilyev/cryptopairanalyzer/badge.svg?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/Ermilyev/cryptopairanalyzer/badge.svg?branch=main)](https://coveralls.io/github/Ermilyev/cryptopairanalyzer?branch=main)
 ![License](https://img.shields.io/github/license/Ermilyev/cryptopairanalyzer.svg)
 
 ## Features
